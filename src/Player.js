@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Enemy({ x, y }) {
+export function Player({ x, y }) {
   const size = 20;
   return (
     <div
@@ -8,7 +8,7 @@ export function Enemy({ x, y }) {
         position: "absolute",
         width: size,
         height: size,
-        backgroundColor: "red",
+        backgroundColor: "blue",
         left: x - size / 2,
         top: y - size / 2
       }}
