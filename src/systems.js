@@ -1,50 +1,17 @@
+
+import MoveUtil from "./utils/MoveUtil";
+
 export function MoveEnemy(entities, { input }) {
 
     const { payload } = input.find(x => x.name === "onMouseDown") || {};
-  
+
     if (payload) {
-      const player = entities["player"];
-      player.x = payload.pageX;
-      player.y = payload.pageY;
+        // 玩家移动方式
+        MoveUtil.playerMouseMove(entities,payload);
     }
-
-    let enemy1 = entities["enemy1"];
-    enemy1.x = enemy1.x + 1;
-    enemy1.y = enemy1.y + 1;
-
-    if(enemy1.x > 800){
-        enemy1.x = 0;
-    }
-    if(enemy1.x < 0){
-        enemy1.x = 800;
-    }
-    if(enemy1.y > 600){
-        enemy1.y = 0;
-    }
-    if(enemy1.y < 0){
-        enemy1.y = 600;
-    }
-
-    enemy1 = entities["enemy2"];
-    enemy1.x = enemy1.x + 3;
-    enemy1.y = enemy1.y - 1;
-
-    if(enemy1.x > 800){
-        enemy1.x = 0;
-    }
-    if(enemy1.x < 0){
-        enemy1.x = 800;
-    }
-    if(enemy1.y > 600){
-        enemy1.y = 0;
-    }
-    if(enemy1.y < 0){
-        enemy1.y = 600;
-    }
-
-
     
-  
+    // 敌人移动方式
+    MoveUtil.randomMove(entities);
+
     return entities;
-  }
-  
+}

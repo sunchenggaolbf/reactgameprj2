@@ -4,15 +4,30 @@ import { GameEngine } from "react-game-engine";
 import { Enemy } from "./Enemy";
 import { Player } from "./Player";
 import { MoveEnemy } from "./systems";
+import Constant from "./Constant";
+import InitUtil from "./utils/InitUtil";
 
 function SimpleGame() {
+  const getEntities = () => {
+    let entities = {};
+    for (let i = 0; i < Constant.enemyCount; i++) {
+      const key = "enemy" + i;
+      entities[key] = {renderer: <Enemy /> };
+    }
+
+    entities["player"] = { renderer: <Player /> };
+
+    return entities;
+  }
+
+  const entities = getEntities();
+  InitUtil.simplePlayerPositionInit(entities);
+  InitUtil.simpleEnemyPositionInit(entities);
   return (
     <GameEngine
       style={{ width: 800, height: 600, backgroundColor: "green" }}
       systems={[MoveEnemy]}
-      entities={{enemy1: { x: 200, y: 200, renderer: <Enemy /> },
-      enemy2: { x: 250, y: 200, renderer: <Enemy /> },
-                 player: { x: 400, y: 400, renderer: <Player /> }}}
+      entities={entities}
     />
   );
 }
